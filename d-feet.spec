@@ -3,7 +3,7 @@ Name:		d-feet
 Version:	0.1.8
 Release:	1
 License:	MIT
-Group:		Libraries/Python
+Group:		X11/Applications
 Source0:	http://johnp.fedorapeople.org/%{name}-%{version}.tar.gz
 # Source0-md5:	51cc70d37786dac0b426b6460dfd98ab
 URL:		https://hosted.fedoraproject.org/d-feet/
@@ -11,10 +11,10 @@ BuildRequires:	python-devel >= 1:2.3.0
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.219
 %pyrequires_eq	python-modules
-Requires:	python-dbus
-Requires:	python-pygtk-gtk
 Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	hicolor-icon-theme
+Requires:	python-dbus
+Requires:	python-pygtk-gtk
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
