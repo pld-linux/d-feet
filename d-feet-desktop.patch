@@ -1,0 +1,9 @@
+--- d-feet-0.1.10/ui/dfeet.desktop~	2008-09-14 17:34:40.000000000 +0200
++++ d-feet-0.1.10/ui/dfeet.desktop	2010-05-12 13:23:12.681263108 +0200
+@@ -7,5 +7,5 @@
+ Icon=dfeet-icon
+ Terminal=false
+ Type=Application
+-Categories=GNOME;GTK;Development;
++Categories=GNOME;GTK;Development;Debugger;
+ GenericName[en_CA]=D-Feet D-Bus Debugger
