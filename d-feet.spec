@@ -1,7 +1,7 @@
 Summary:	D-Feet - a D-Bus debugger
 Name:		d-feet
 Version:	0.1.10
-Release:	2
+Release:	3
 License:	MIT
 Group:		X11/Applications
 Source0:	http://johnp.fedorapeople.org/downloads/d-feet/%{name}-%{version}.tar.gz
