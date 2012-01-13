@@ -1,12 +1,11 @@
 Summary:	D-Feet - a D-Bus debugger
 Name:		d-feet
-Version:	0.1.10
-Release:	6
+Version:	0.1.11
+Release:	1
 License:	MIT
 Group:		X11/Applications
 Source0:	http://johnp.fedorapeople.org/downloads/d-feet/%{name}-%{version}.tar.gz
-# Source0-md5:	c97df997442a99233229d45bff5ed88d
-Patch0:		%{name}-desktop.patch
+# Source0-md5:	8ee6c827a7f81910591617f319e95c15
 URL:		https://fedorahosted.org/d-feet/
 BuildRequires:	python-devel >= 1:2.3.0
 BuildRequires:	rpm-pythonprov
@@ -25,7 +24,6 @@ D-Feet is a D-Bus debugger.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 %{__python} setup.py build
