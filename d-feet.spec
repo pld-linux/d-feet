@@ -5,15 +5,16 @@
 Summary:	D-Feet - a D-Bus debugger
 Summary(pl.UTF-8):	D-Feet - debugger dla magistrali D-Bus
 Name:		d-feet
-Version:	0.3.9
+Version:	0.3.10
 Release:	1
 License:	GPL v3+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/d-feet/0.3/%{name}-%{version}.tar.xz
-# Source0-md5:	91da9520aa0460bdb51e60b93b61102f
+# Source0-md5:	a1ad05205cc68650c2770eeeb7c81953
 URL:		http://live.gnome.org/DFeet/
 BuildRequires:	autoconf >= 2.64
 BuildRequires:	automake >= 1:1.11
+BuildRequires:	gnome-common
 BuildRequires:	gobject-introspection-devel >= 0.9.6
 BuildRequires:	gtk+3-devel >= 3.10
 BuildRequires:	intltool >= 0.40.0
@@ -48,6 +49,7 @@ D-Feet to debugger dla magistrali D-Bus.
 
 %build
 # rebuild with POSIX sh compatible yelp macros
+%{__intltoolize}
 %{__aclocal}
 %{__autoconf}
 %{__automake}
@@ -87,7 +89,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/d-feet.desktop
 %{_datadir}/glib-2.0/schemas/org.gnome.d-feet.gschema.xml
 %{py_sitescriptdir}/dfeet
-%{_iconsdir}/hicolor/*/apps/d-feet.*
+%{_iconsdir}/hicolor/*x*/apps/d-feet.png
+%{_iconsdir}/hicolor/scalable/apps/d-feet.svg
 %{_iconsdir}/hicolor/16x16/apps/dfeet-*.png
 # who owns top dir?
 #%{_iconsdir}/HighContrast/scalable/apps/d-feet.svg
