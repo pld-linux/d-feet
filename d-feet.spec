@@ -5,12 +5,12 @@
 Summary:	D-Feet - a D-Bus debugger
 Summary(pl.UTF-8):	D-Feet - debugger dla magistrali D-Bus
 Name:		d-feet
-Version:	0.3.11
+Version:	0.3.12
 Release:	1
 License:	GPL v3+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/d-feet/0.3/%{name}-%{version}.tar.xz
-# Source0-md5:	a31834a127892692061732f4b09da64c
+# Source0-md5:	6e17a11ac2829a28b195845954e31d38
 URL:		http://live.gnome.org/DFeet/
 BuildRequires:	autoconf >= 2.64
 BuildRequires:	automake >= 1:1.11
@@ -34,7 +34,7 @@ Requires(post,postun):	hicolor-icon-theme
 Requires:	gtk+3 >= 3.10
 Requires:	python >= 1:2.7
 Requires:	python-pygobject3 >= 3.4
-Suggests:	libwnck >= 3
+Suggests:	libwnck >= 3.0
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
