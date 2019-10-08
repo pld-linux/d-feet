@@ -5,28 +5,25 @@
 Summary:	D-Feet - a D-Bus debugger
 Summary(pl.UTF-8):	D-Feet - debugger dla magistrali D-Bus
 Name:		d-feet
-Version:	0.3.12
+Version:	0.3.15
 Release:	1
-License:	GPL v3+
+License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/d-feet/0.3/%{name}-%{version}.tar.xz
-# Source0-md5:	6e17a11ac2829a28b195845954e31d38
-URL:		http://live.gnome.org/DFeet/
-BuildRequires:	autoconf >= 2.64
-BuildRequires:	automake >= 1:1.11
-BuildRequires:	gnome-common
+# Source0-md5:	44f046c5c35256f346db516dab3f938a
+URL:		https://wiki.gnome.org/Apps/DFeet
 BuildRequires:	gobject-introspection-devel >= 0.9.6
 BuildRequires:	gtk+3-devel >= 3.10
-BuildRequires:	intltool >= 0.40.0
+BuildRequires:	meson >= 0.50.0
+BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
 BuildRequires:	python-devel >= 1:2.7
 %{?with_tests:BuildRequires:	python-pep8}
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.592
+BuildRequires:	rpmbuild(macros) >= 1.736
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 BuildRequires:	yelp-tools
-%pyrequires_eq	python-modules
 Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	glib2-devel >= 1:2.26.0
 Requires(post,postun):	gtk-update-icon-cache
@@ -48,22 +45,21 @@ D-Feet to debugger dla magistrali D-Bus.
 %setup -q
 
 %build
-# rebuild with POSIX sh compatible yelp macros
-%{__intltoolize}
-%{__aclocal}
-%{__autoconf}
-%{__automake}
-%configure \
-	%{!?with_tests:--disable-tests}
-%{__make}
+%meson build \
+	%{!?with_tests:-Dtests=false}
+
+%ninja_build -C build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+%ninja_install -C build
 
-%py_postclean
+# meson is so great, "pure: true" for python.install_sources doesn't work
+install -d $RPM_BUILD_ROOT%{py3_sitescriptdir}
+%{__mv} $RPM_BUILD_ROOT%{py3_sitedir}/dfeet $RPM_BUILD_ROOT%{py3_sitescriptdir}
+%py3_comp $RPM_BUILD_ROOT%{py3_sitescriptdir}
+%py3_ocomp $RPM_BUILD_ROOT%{py3_sitescriptdir}
 
 %find_lang %{name} --with-gnome
 
@@ -85,12 +81,10 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS NEWS README TODO
 %attr(755,root,root) %{_bindir}/d-feet
 %{_datadir}/d-feet
-%{_datadir}/appdata/d-feet.appdata.xml
-%{_desktopdir}/d-feet.desktop
-%{_datadir}/glib-2.0/schemas/org.gnome.d-feet.gschema.xml
-%{py_sitescriptdir}/dfeet
-%{_iconsdir}/hicolor/*x*/apps/d-feet.png
-%{_iconsdir}/hicolor/scalable/apps/d-feet.svg
+%{_datadir}/glib-2.0/schemas/org.gnome.dfeet.gschema.xml
+%{_datadir}/metainfo/org.gnome.dfeet.appdata.xml
+%{py3_sitescriptdir}/dfeet
+%{_desktopdir}/org.gnome.dfeet.desktop
 %{_iconsdir}/hicolor/16x16/apps/dfeet-*.png
-# who owns top dir?
-#%{_iconsdir}/HighContrast/scalable/apps/d-feet.svg
+%{_iconsdir}/hicolor/scalable/apps/org.gnome.dfeet.svg
+%{_iconsdir}/hicolor/symbolic/apps/org.gnome.dfeet-symbolic.svg
