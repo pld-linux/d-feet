@@ -5,20 +5,21 @@
 Summary:	D-Feet - a D-Bus debugger
 Summary(pl.UTF-8):	D-Feet - debugger dla magistrali D-Bus
 Name:		d-feet
-Version:	0.3.15
-Release:	5
+Version:	0.3.16
+Release:	1
 License:	GPL v2+
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/d-feet/0.3/%{name}-%{version}.tar.xz
-# Source0-md5:	44f046c5c35256f346db516dab3f938a
+Source0:	https://download.gnome.org/sources/d-feet/0.3/%{name}-%{version}.tar.xz
+# Source0-md5:	c5cc09323c725210b0c420e40fb81e4c
+Patch0:		%{name}-cleanup.patch
 URL:		https://wiki.gnome.org/Apps/DFeet
 BuildRequires:	gobject-introspection-devel >= 0.9.6
 BuildRequires:	gtk+3-devel >= 3.10
 BuildRequires:	meson >= 0.50.0
 BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
-BuildRequires:	python-devel >= 1:2.7
-%{?with_tests:BuildRequires:	python-pep8}
+BuildRequires:	python3-devel >= 1:3.5
+%{?with_tests:BuildRequires:	python3-pep8}
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.736
 BuildRequires:	tar >= 1:1.22
@@ -29,8 +30,8 @@ Requires(post,postun):	glib2-devel >= 1:2.26.0
 Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	hicolor-icon-theme
 Requires:	gtk+3 >= 3.10
-Requires:	python >= 1:2.7
-Requires:	python-pygobject3 >= 3.4
+Requires:	python3 >= 1:3.5
+Requires:	python3-pygobject3 >= 3.4
 Suggests:	libwnck >= 3.0
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -43,6 +44,7 @@ D-Feet to debugger dla magistrali D-Bus.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %meson build \
@@ -78,7 +80,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS NEWS README TODO
+%doc AUTHORS NEWS README.md TODO
 %attr(755,root,root) %{_bindir}/d-feet
 %{_datadir}/d-feet
 %{_datadir}/glib-2.0/schemas/org.gnome.dfeet.gschema.xml
