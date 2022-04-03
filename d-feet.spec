@@ -12,6 +12,7 @@ Group:		X11/Applications
 Source0:	https://download.gnome.org/sources/d-feet/0.3/%{name}-%{version}.tar.xz
 # Source0-md5:	c5cc09323c725210b0c420e40fb81e4c
 Patch0:		%{name}-cleanup.patch
+Patch1:		meson0.60.patch
 URL:		https://wiki.gnome.org/Apps/DFeet
 BuildRequires:	gobject-introspection-devel >= 0.9.6
 BuildRequires:	gtk+3-devel >= 3.10
@@ -45,6 +46,7 @@ D-Feet to debugger dla magistrali D-Bus.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 %meson build \
@@ -57,9 +59,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %ninja_install -C build
 
-# meson is so great, "pure: true" for python.install_sources doesn't work
-install -d $RPM_BUILD_ROOT%{py3_sitescriptdir}
-%{__mv} $RPM_BUILD_ROOT%{py3_sitedir}/dfeet $RPM_BUILD_ROOT%{py3_sitescriptdir}
 %py3_comp $RPM_BUILD_ROOT%{py3_sitescriptdir}
 %py3_ocomp $RPM_BUILD_ROOT%{py3_sitescriptdir}
 
