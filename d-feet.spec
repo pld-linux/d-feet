@@ -22,7 +22,7 @@ BuildRequires:	pkgconfig
 BuildRequires:	python3-devel >= 1:3.5
 %{?with_tests:BuildRequires:	python3-pep8}
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.736
+BuildRequires:	rpmbuild(macros) >= 2.042
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 BuildRequires:	yelp-tools
@@ -49,15 +49,15 @@ D-Feet to debugger dla magistrali D-Bus.
 %patch -P 1 -p1
 
 %build
-%meson build \
+%meson \
 	%{!?with_tests:-Dtests=false}
 
-%ninja_build -C build
+%meson_build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%ninja_install -C build
+%meson_install
 
 %py3_comp $RPM_BUILD_ROOT%{py3_sitescriptdir}
 %py3_ocomp $RPM_BUILD_ROOT%{py3_sitescriptdir}
